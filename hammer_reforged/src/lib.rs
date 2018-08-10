@@ -23,9 +23,13 @@ const DLL_THREAD_DETACH: DWORD = 3;
 #[allow(non_snake_case)]
 pub extern "stdcall" fn DllMain(dll_handle: HINSTANCE, reason: DWORD, reserved: LPVOID) -> BOOL {
 	match reason {
-		DLL_PROCESS_DETACH => {}
+		DLL_PROCESS_DETACH => {
+			// TODO cleanup
+		},
 		DLL_PROCESS_ATTACH => {
-			initialize();
+			thread::spawn(move || {
+				initialize();
+			});
 		},
 		_ => {}
 	}
