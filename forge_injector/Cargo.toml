@@ -1,0 +1,9 @@
+[package]
+name = "forge_injector"
+version = "0.1.0"
+authors = ["Zach <Exactol>"]
+
+[dependencies]
+winapi = { version = "0.3.5", features = ["winuser", "tlhelp32", "ntdef", "handleapi", "minwindef", "libloaderapi", "winnt", "processthreadsapi", "securitybaseapi", "winbase", "minwinbase", "memoryapi"] }
+widestring = "0.3.0"
+hammer_reforged = { path = "../hammer_reforged"}
