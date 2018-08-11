@@ -12,6 +12,7 @@ use std::io;
 use std::mem;
 use sigscan::SigScanner;
 use utils::string_utils::WindowsStringUtils;
+use utils::resource::*;
 use ui::reforged_menu::*;
 
 pub fn initialize() {
@@ -32,10 +33,13 @@ pub fn initialize() {
 
 // creates menus and their submenus
 fn initialize_menus(h_hammer_menu: &mut HMENU) {
-	let test_menu = ReforgedSubMenu::new(1, "Hello Hammer");
-	let mut test_parent = ReforgedMenu::new("Test");
-	test_parent.add_submenu(test_menu);
-	test_parent.show(h_hammer_menu);
+	let test_menu = SubMenu::new(ID_EXIT, "Hello Hammer");
+	let test_menu2 = SubMenu::new(ID_EXIT, "Hello Hammer");
+	let test_seperator = SubMenu::new_seperator();
+	let mut test_parent = Menu::new("Test");
+
+	test_parent.add_submenu(test_menu).add_submenu(test_seperator).add_submenu(test_menu2).add_parent(h_hammer_menu);
+	test_parent.show();
 }
 
 struct Config {
