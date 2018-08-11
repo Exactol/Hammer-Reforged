@@ -1,17 +1,11 @@
-extern crate winapi;
+mod reforged;
+mod sigscan;
+mod ui;
+mod utils;
 
-use std::ptr;
+extern crate winapi;
 use std::thread;
-use std::ffi::CString;
-use std::ffi::OsStr;
-use std::os::windows::ffi::OsStrExt;
-use winapi::shared::minwindef::{UINT, HINSTANCE, DWORD, LPVOID, BOOL, TRUE};
-use winapi::shared::windef::{HWND};
-use winapi::um::winuser::{MB_OK, MB_ICONINFORMATION, MessageBoxA};
-use winapi::um::winnt::LPCWSTR;
-use winapi::um::consoleapi::AllocConsole;
-use winapi::um::processthreadsapi::CreateThread;
-use std::io;
+use winapi::shared::minwindef::{HINSTANCE, DWORD, LPVOID, BOOL, TRUE};
 
 const DLL_PROCESS_DETACH: DWORD = 0;
 const DLL_PROCESS_ATTACH: DWORD = 1;
@@ -27,33 +21,13 @@ pub extern "stdcall" fn DllMain(dll_handle: HINSTANCE, reason: DWORD, reserved: 
 			// TODO cleanup
 		},
 		DLL_PROCESS_ATTACH => {
+			// move to new thread to prevent deadlocks or something
 			thread::spawn(move || {
-				initialize();
+				reforged::initialize();
 			});
 		},
 		_ => {}
 	}
 
 	return TRUE;
-}
-
-fn initialize() {
-	unsafe { AllocConsole() };
-	println!("test");
-	println!("test");
-	println!("test");
-	println!("test");
-	println!("test");
-
-	// let lp_text = CString::new("Hello, world!").unwrap();
-	// let lp_caption = CString::new("MessageBox Example").unwrap();
-	// unsafe { MessageBoxA(
-	// 	std::ptr::null_mut(),
-	// 	lp_text.as_ptr(),
-	// 	lp_caption.as_ptr(),
-	// 	MB_OK | MB_ICONINFORMATION
-	// ) };
-
-	// let mut temp = String::new();
-	// io::stdin().read_line(&mut temp);
 }

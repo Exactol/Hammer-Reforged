@@ -3,12 +3,12 @@ name = "hammer_reforged"
 version = "0.1.0"
 authors = ["Zach <Exactol>"]
 
-[dependencies]
-winapi = { version = "0.3.5", features = ["winuser", 
-"tlhelp32", "ntdef", "handleapi", "minwindef", "libloaderapi", "winnt", "processthreadsapi", 
-"securitybaseapi", "winbase", "minwinbase", "memoryapi", "consoleapi", "synchapi"] }
-widestring = "0.3.0"
-
 [lib]
 name = "HammerReforged"
 crate-type = ["cdylib"]
+
+[dependencies]
+winapi = { version = "0.3.5", features = ["winuser", 
+"tlhelp32", "ntdef", "handleapi", "minwindef", "libloaderapi", "winnt", "processthreadsapi", 
+"securitybaseapi", "winbase", "minwinbase", "memoryapi", "consoleapi", "synchapi", "psapi"] }
+widestring = "0.3.0"
