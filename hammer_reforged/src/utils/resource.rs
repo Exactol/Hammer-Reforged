@@ -1,4 +1,4 @@
-pub const ID_EXIT: u32 = 52776;
+pub const ID_EXIT: u32 = 52774;
 // #define IDB_COMPILEPAL                  1000
 // #define IDB_TEST                        1001
 // #define IDB_PLACEHOLDER                 1002

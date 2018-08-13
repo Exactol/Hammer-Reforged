@@ -6,6 +6,7 @@ mod utils;
 extern crate winapi;
 use std::thread;
 use winapi::shared::minwindef::{HINSTANCE, DWORD, LPVOID, BOOL, TRUE};
+use reforged::HammerReforged;
 
 const DLL_PROCESS_DETACH: DWORD = 0;
 const DLL_PROCESS_ATTACH: DWORD = 1;
@@ -21,9 +22,18 @@ pub extern "stdcall" fn DllMain(dll_handle: HINSTANCE, reason: DWORD, reserved: 
 			// TODO cleanup
 		},
 		DLL_PROCESS_ATTACH => {
+			// TODO: find way to rename thread
+			// let builder = thread::Builder::new().name("Hammer Reforged".into());
+			// let handler = builder.spawn(move || {
+			// 	reforged::initialize();
+			// }).unwrap();
+
+			// handler.join().unwrap();
+
 			// move to new thread to prevent deadlocks or something
 			thread::spawn(move || {
-				reforged::initialize();
+				let mut ham_reforged = HammerReforged::new();
+				ham_reforged.initialize();
 			});
 		},
 		_ => {}
